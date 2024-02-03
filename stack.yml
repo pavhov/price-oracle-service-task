@@ -1,0 +1,65 @@
+version: '3.9'
+
+x-db-variables: &db-variables
+  MONGO_INITDB_ROOT_USERNAME: root
+  MONGO_INITDB_ROOT_PASSWORD: example
+  MONGO_INITDB_DATABASE: price
+
+x-service-variables: &service-variables
+  PORT: 3000
+  URL: http://localhost:3000
+  MONGO_URL: mongodb://root:example@mongo:27017/
+  MONGO_DB: price
+  SWAGGER_SERVER: http://localhost:3000
+  cryptocompare_token: c35bcd93c7f1e4a0f924e5a66b0c1014a86a9b7f1a4bbc9c1cd5802759b9f64d
+
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      <<: *db-variables
+    networks:
+      - local
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      <<: *db-variables
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    networks:
+      - local
+
+  price-oracle:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: service
+    environment:
+      <<: *service-variables
+    networks:
+      - local
+    ports:
+      - "3000:3000"
+    entrypoint: [ "node", "/build/dist/apps/price-oracle/main" ]
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: service
+    environment:
+      <<: *service-variables
+    networks:
+      - local
+    entrypoint: [ "node", "/build/dist/apps/worker/main" ]
+
+networks:
+  local:
+    driver: bridge

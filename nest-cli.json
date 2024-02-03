@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/price-oracle/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/price-oracle/tsconfig.app.json"
+  },
+  "projects": {
+    "utils": {
+      "type": "library",
+      "root": "libs/utils",
+      "entryFile": "index",
+      "sourceRoot": "libs/utils/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/utils/tsconfig.lib.json"
+      }
+    },
+    "price-oracle": {
+      "type": "application",
+      "root": "apps/price-oracle",
+      "entryFile": "main",
+      "sourceRoot": "apps/price-oracle/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/price-oracle/tsconfig.app.json"
+      }
+    },
+    "worker": {
+      "type": "application",
+      "root": "apps/worker",
+      "entryFile": "main",
+      "sourceRoot": "apps/worker/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/worker/tsconfig.app.json"
+      }
+    },
+    "service": {
+      "type": "library",
+      "root": "libs/service",
+      "entryFile": "index",
+      "sourceRoot": "libs/service/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/service/tsconfig.lib.json"
+      }
+    }
+  },
+  "monorepo": true,
+  "root": "apps/price-oracle"
+}

@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "declaration": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "paths": {
+      "@github.com/pavhov/price-oracle-service-task/utils": [
+        "libs/utils/src"
+      ],
+      "@github.com/pavhov/price-oracle-service-task/utils/*": [
+        "libs/utils/src/*"
+      ],
+      "@github.com/pavhov/price-oracle-service-task/price-oracle": [
+        "apps/price-oracle/src"
+      ],
+      "@github.com/pavhov/price-oracle-service-task/price-oracle/*": [
+        "apps/price-oracle/src/*"
+      ],
+      "@github.com/pavhov/price-oracle-service-task/worker": [
+        "apps/worker/src"
+      ],
+      "@github.com/pavhov/price-oracle-service-task/worker/*": [
+        "apps/worker/src/*"
+      ],
+      "@github.com/pavhov/price-oracle-service-task/service": [
+        "libs/service/src"
+      ],
+      "@github.com/pavhov/price-oracle-service-task/service/*": [
+        "libs/service/src/*"
+      ]
+    }
+  }
+}
